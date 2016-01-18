@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>IR Timeline</title>
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="custom.css">
+	<!-- JavaScript -->
+	<script src="http://code.jquery.com/jquery-2.2.0.min.js" charset="utf-8"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="timeline.js"></script>
+	<script>
+	function itemhover(d) {
+		// this function will be called when a node is clicked
+		// alert(d.id);
+		$('#summary>h1').text(d.title);
+		$('#summary>p').text(d.summary);
+	}
+	window.onload = function() {
+		loadchart("svgContent", "demodata.json");
+	}
+	</script>
+</head>
+
+<body>
+<div class="container">
+	<div id="svgContent" class="chart"></div>
+	<div id="summary">
+		<h1>Hover the node!</h1>
+		<p>and you can see the summary here.</p>
+	</div>
+</div>
+	<script type="text/javascript">
+	$('.chart').css('width', $('.container').width() - 80);
+	$('.chart').css('height', $(document).height() / 2);
+	</script>
+</body>
+
+</html>
