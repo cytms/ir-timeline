@@ -23,6 +23,10 @@
 		stroke: #000000;
 	}
 	
+	.red {
+		fill: #941751;
+	}
+	
 	.notprecise {
 		stroke: black;
 	}
