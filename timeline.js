@@ -21,7 +21,7 @@ function loadchart(div, json) {
 
   // d3.json(json, function(error, graph) {
   var graph = json;
-  var line = d3.svg.line()
+  var line = d3.svg.line();
 
   // var earliest = convertDateTime(graph.nodes[0].timestamp);
   // TODO discover latest by looking rather than assuming the nodes are sorted
@@ -57,18 +57,6 @@ function loadchart(div, json) {
     .tickSize(5)
     .tickPadding(8);
 
-  // var xAxisMonths = d3.svg.axis()
-  //   .scale(x)
-  //   .orient("bottom")
-  //   .ticks(d3.time.months, 1)
-  //   .tickFormat(d3.time.format("%B %Y"))
-  //   .tickSize(5, 0);
-
-  // svg.append('g')
-  //   .attr('class', 'x axis monthaxis')
-  //   .attr('transform', 'translate(0, ' + (height - margin.top - margin.bottom) + ')')
-  //   .attr('style', 'opacity: 0.1')
-  //   .call(xAxisMonths);
   svg.append('g')
     .attr('class', 'x axis dayaxis')
     .attr('transform', 'translate(0, ' + (height - margin.top - margin.bottom) + ')')
@@ -103,24 +91,8 @@ function loadchart(div, json) {
       c = "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " +
         d.target.x + "," + d.target.y;
     }
-    // console.log(c);
     return c;
   }
-
-  // Arrowheads
-  // svg.append("svg:defs").selectAll("marker")
-  //   .data(["end"])
-  //   .enter().append("svg:marker")
-  //   .attr("id", String)
-  //   .attr("class", "arrowhead")
-  //   .attr("viewBox", "0 -5 10 10")
-  //   .attr("refX", 25)
-  //   .attr("refY", -1.5)
-  //   .attr("markerWidth", 8)
-  //   .attr("markerHeight", 8)
-  //   .attr("orient", "auto")
-  //   .append("svg:path")
-  //   .attr("d", "M0,-5L10,0L0,5");
 
   var link = svg.selectAll(".link")
     .data(graph.links)
@@ -141,7 +113,7 @@ function loadchart(div, json) {
     //   otherwise at top of graph to allow it to be pulled into position
 
     radius = node.rank + 10;
-    // console.log(radius);
+
     node.x = x(convertDateTime(node.timestamp)) + (2 * radius);
 
     var previousLetters = (stackcounts['d' + node.timestamp]) ? stackcounts['d' + node.timestamp] : 0;
@@ -175,36 +147,14 @@ function loadchart(div, json) {
       return d.name;
     });
 
-  // text, centered in node, with white shadow for legibility
-  // node.append("text")
-  //   .attr("text-anchor", "middle")
-  //   .attr("dy", function(d) {
-  //     return (d.rank / 2 + 5) / 2;
-  //   })
-  //   .attr("class", "shadow")
-  //   .text(function(d) {
-  //     return d.id
-  //   });
-  // node.append("text")
-  //   .attr("text-anchor", "middle")
-  //   .attr("dy", function(d) {
-  //     return (d.rank / 2 + 5) / 2;
-  //   })
-  //   .text(function(d) {
-  //     return d.id
-  //   });
-
-  // on click, do something with id
-  // implement this in a function outside this block
-
   node.on("mouseover", function(d) {
     itemhover(d);
   });
 
   node.on("mouseout", function(d) {
-    itemout(d);
-  })
-  // Resolves collisions between d and all other circles.
+      itemout(d);
+    })
+    // Resolves collisions between d and all other circles.
   function collide(node) {
     radius = node.rank / 2 + 15;
     var r = radius + 8,
@@ -285,12 +235,13 @@ function convertDateTime(dateTime) {
   var h = time[0];
   var m = time[1];
   var s = parseInt(time[2]); //get rid of that 00.0;
-  // console.log(dateTime)
+
   return new Date(yyyy, mm, dd, h, m, s);
 }
 
 function getRange(nodes) {
-  var min = null, max = null;
+  var min = null,
+    max = null;
   nodes.forEach(function(node) {
     var ts = convertDateTime(node.timestamp)
     if (min == null || ts < min) {

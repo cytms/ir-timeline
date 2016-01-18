@@ -17,11 +17,9 @@
 
 	function itemhover(d) {
 		// this function will be called when a node is clicked
-		// alert(d.id);
 		$('#summary>h1').text(d.title);
 		$('#summary>p').text(d.summary);
 		$('#n' + d.id).css('fill', '#6DA319');
-		// console.log($('#n' + d.id).attr('r') + expansion);
 		$('#n' + d.id).attr('r', (parseFloat($('#n' + d.id).attr('r')) + expansion));
 	}
 
@@ -179,7 +177,7 @@
 	</div>
 	<script type="text/javascript">
 	$('.chart').css('width', $('.container').width() - 80);
-	$('.chart').css('height', $(document).height() / 2);
+	$('.chart').css('height', 400);
 	</script>
 </body>
 
